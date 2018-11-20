@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hxkj</groupId>
+    <artifactId>rbac-shiro</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <!--描述了这个项目构建环境中的前提条件。-->
+    <properties>
+        <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+        <jdk.version>1.7</jdk.version>
+        <junit.version>4.12</junit.version>
+        <servlet.version>3.0.1</servlet.version>
+        <log4j2.version>2.8.2</log4j2.version>
+        <spring.version>4.3.8.RELEASE</spring.version>
+        <mybaitsplus.version>2.0.8</mybaitsplus.version>
+        <mysql.version>5.1.40</mysql.version>
+        <druid.version>1.0.29</druid.version>
+        <shiro.version>1.3.2</shiro.version>
+        <ehcache.version>2.6.11</ehcache.version>
+        <jackson.version>2.8.8</jackson.version>
+        <commons-io.version>2.5</commons-io.version>
+        <hibernate-validator.version>5.3.5.Final</hibernate-validator.version>
+        <poi.version>3.16</poi.version>
+    </properties>
+    <!--项目依赖-->
+    <dependencies>
+        <!-- test begin -->
+        <!--junit测试用到的包，scope：test 表示该包只在测试的情况下被使用-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--el表达式所需包-->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- test end -->
+
+        <!-- web begin -->
+        <!--servlet,jsp所需要的包，scope:provided表示该包只在编译和测试的时候用-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!-- web end -->
+
+        <!-- log4j2 begin -->
+        <!--log4j2的依赖包-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <!-- log4j2 end -->
+        <!-- Spring begin -->
+        <!--spring所需要的依赖包-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        <!-- spring end -->
+
+        <!--关于流、文件等IO操作的依赖包-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <!-- Mybatis-Plus的依赖包 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybaitsplus.version}</version>
+        </dependency>
+        <!--mysql的依赖包-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+        <!--阿里巴巴的数据库连接池，由于以往的数据库连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <!-- jackson begin -->
+        <!--复杂对象和json数据互转的依赖包-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- jackson end -->
+
+        <!-- shiro begin -->
+        <!--shiro安全框架的依赖包-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- shiro end -->
+
+        <!-- hibernate-validator -->
+        <!--Hibernate项目中的框架Validator，用来验证实体类是否满足需求,使用注解的方式-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+        </dependency>
+
+        <!-- poi provided 不强制依赖 -->
+        <!--文件导入导出用到的依赖包-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ehcache和redis必选其一，也可同时使用（需要注意） -->
+        <!--ehcache缓存使用所需依赖包-->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>${ehcache.version}</version>
+        </dependency>
+
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.8.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.dreamlu</groupId>
+            <artifactId>Spring-Ueditor</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>shiro</finalName>
+        <!--指定resources(资源)插件处理哪些目录下的资源文件-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/conf/${profiles.active}</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- 使用这个插件指定maven编译的jdk版本,
+            如果不指定,maven3默认用jdk 1.5 maven2默认用jdk1.3-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <!-- jetty:run 添加jetty插件以便启动 -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.3.10.v20160621</version>
+                <configuration>
+                    <stopPort>9966</stopPort>
+                    <stopKey>stop</stopKey>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
+            <!-- tomcat7:run -->
+            <!--配置tomcat插件，使用tomcat7部署项目,配置Tomcat Server-->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <server>tomcat7</server>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--在列的项目构建profile，如果被激活，会修改构建处理-->
+    <!--配置不同的配置环境：development（开发环境），production（生产环境）-->
+    <profiles>
+        <!-- 默认激活 dev 开发环境 -->
+        <!-- 线上使用 mvn 打包添加 -Pproduction 变量 -->
+        <!--根据环境参数或命令行参数激活某个构建处理-->
+        <profile>
+            <!-- 本地开发环境 -->
+            <!--构建配置的唯一标识符。即用于命令行激活，也用于在继承时合并具有相同标识符的profile。-->
+            <id>development</id>
+            <properties>
+                <!-- 这里的标签名任意，在项目的 properties、xml等配置文件中
+                可以使用${profiles.active}取出dev这个值-->
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <!-- 本地使用 velocity 作为代码生成器，兼容idea -->
+                <dependency>
+                    <groupId>org.apache.velocity</groupId>
+                    <artifactId>velocity</artifactId>
+                    <version>1.7</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <!-- 生产环境 -->
+            <id>production</id>
+            <properties>
+                <profiles.active>production</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!-- 使用aliyun镜像 -->
+    <!--依赖仓库管理-->
+    <repositories>
+        <repository>
+            <!--远程仓库唯一标识符-->
+            <id>aliyun</id>
+            <!--远程仓库名称-->
+            <name>aliyun</name>
+            <!--远程仓库url-->
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <!-- spring-framework-bom -->
+    <!--Maven中的dependencyManagement元素提供了一种管理依赖版本号的方式。
+    在dependencyManagement元素中声明所依赖的jar包的版本号等信息，
+    那么所有子项目再次引入此依赖jar包时则无需显式的列出版本号。
+    Maven会沿着父子层级向上寻找拥有dependencyManagement 元素的项目，
+    然后使用它指定的版本号-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <!--它只使用在<dependencyManagement>中，表示从其它的pom中导入dependency的配置-->
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
